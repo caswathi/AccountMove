@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+         <record id="employee_inheritt" model="ir.ui.view">
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+             <field name="model">hr.employee</field>
+             <field name="arch" type="xml">
+                 <field name="mobile_phone" position="before">
+                    <field name="is_doctor"/>
+                     <field name="associate_count" invisible="True"/>
+                </field>
+                 <field name="coach_id" position="after">
+                    <field name="fees"
+                           attrs="{'invisible': [('job_id', '!=', 1)]}"
+                           widget="monetary"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

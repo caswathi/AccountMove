@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+      <data>
+             <record id="increment_your_medicine_sequence" model="ir.sequence">
+                  <field name="name">Field Incrementation</field>
+                  <field name="code">medicine_sequence</field>
+                  <field name="prefix">MED</field>
+                  <field name="padding">5</field>
+          </record>
+      </data>
+</odoo>

@@ -1,0 +1,93 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+  <record model="ir.ui.view" id="op_list">
+      <field name="name">Op List</field>
+      <field name="model">hospital.op</field>
+      <field name="arch" type="xml">
+        <tree>
+            <field name="token" optional="show"/>
+            <field name="employee_id" optional="show"/>
+              <field name="patient_id" />
+              <field name="pname"/>
+              <field name="p_age" optional="show"/>
+              <field name="p_gender" optional="hide"/>
+             <field name="status" optional="hide"/>
+          <field name="blood_group" optional="show"/>
+            <field name="current_date" optional="show"/>
+        </tree>
+      </field>
+  </record>
+
+    <record model="ir.ui.view" id="op_form">
+      <field name="name">Op form</field>
+      <field name="model">hospital.op</field>
+      <field name="arch" type="xml">
+       <form>
+             <header>
+                 <button name="button_confirm" type="object"
+                         class='oe_highlight' string="Confirm"
+                         attrs="{'invisible': [('status', '=', 'confirmed')]}"/>
+                  <button name="button_reset" type="object"
+                          string="Reset to Draft"
+                          attrs="{'invisible': [('status', '=', 'draft')]}"
+                          class='oe_highlight'/>
+                 <button name="button_payment" type="object"
+                         class='oe_highlight' string="Create Invoice"
+                         attrs="{'invisible': [('status', '=', 'draft')]}"/>
+               <field name="status" widget="statusbar"
+                      statusbar_visible="draft,confirmed"/>
+           </header>
+         <sheet>
+             <group colspan="2" col="2">
+             <group>
+                  <field name="token"
+                         attrs="{'invisible': [('status', '=', 'draft')]}"/>
+                  <field name="patient_id" />
+                 <field name="pname"/>
+                <field name="p_age" />
+                <field name="p_gender"/>
+               </group>
+                <group>
+                    <field name="blood_group"/>
+                 <field name="employee_id"/>
+                 <field name="current_date"/>
+                 <field name="currency_id"/>
+                 <field name="fees" widget="monetary"/>
+                </group>
+           </group>
+         </sheet>
+       </form>
+      </field>
+    </record>
+
+       <record model="ir.ui.view" id="hospital_op_search">
+      <field name="name">Op search</field>
+      <field name="model">hospital.op</field>
+      <field name="arch" type="xml">
+        <search string="Search Op">
+                <field name="token" optional="show"/>
+                <field name="employee_id" optional="show"/>
+                <field name="patient_id" />
+                <field name="pname"/>
+                <field name="p_age" optional="show"/>
+                <field name="p_gender" optional="hide"/>
+                <field name="status" optional="hide"/>
+                <field name="blood_group" optional="show"/>
+          <filter string="Todays OP" name="current_date"
+                  domain="[('current_date','=',current_date)]"/>
+          <group expand="1" string="Group By">
+            <filter string="Date" name="current_date"
+                    context="{'group_by':'current_date'}"/>
+              <filter string="Doctor" name="employee_id"
+                      context="{'group_by':'employee_id'}"/>
+               <filter string="Patient" name="patient_id"
+                      context="{'group_by':'patient_id'}"/>
+          </group>
+        </search>
+      </field>
+    </record>
+
+  </data>
+</odoo>

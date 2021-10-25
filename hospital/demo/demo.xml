@@ -1,0 +1,28 @@
+<odoo>
+    <data noupdate="0">
+
+        <!-- Test data for diseases -->
+        <record id="test_disease1" model="hospital.disease">
+            <field name="name">Malaria</field>
+        </record>
+         <record id="test_disease2" model="hospital.disease">
+            <field name="name">H1N1</field>
+        </record>
+
+        <!-- Test data for medicines -->
+        <record id="test_medicine1" model="hospital.medicine">
+            <field name="name">Covishield</field>
+            <field name="medicine_company">ABC</field>
+            <field name="medicine_cost">500</field>
+            <field name="medicine_description">fdgfdghf</field>
+            <field name="medicine_dose">11</field>
+        </record>
+         <record id="test_medicine2" model="hospital.medicine">
+            <field name="name">Covaxin</field>
+             <field name="medicine_company">XYZ</field>
+             <field name="medicine_cost">200</field>
+            <field name="medicine_description">safdgf</field>
+            <field name="medicine_dose">3</field>
+        </record>
+    </data>
+</odoo>

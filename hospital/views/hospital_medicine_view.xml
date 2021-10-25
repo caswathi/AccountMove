@@ -1,0 +1,47 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+  <record model="ir.ui.view" id="medicine_list">
+      <field name="name">Medicine List</field>
+      <field name="model">hospital.medicine</field>
+      <field name="arch" type="xml">
+        <tree>
+            <field name="medicine_id"/>
+            <field name="name" />
+              <field name="medicine_company" />
+              <field name="medicine_cost" optional="show"/>
+        </tree>
+      </field>
+  </record>
+
+    <record model="ir.ui.view" id="medicine_form">
+      <field name="name">Medicine form</field>
+      <field name="model">hospital.medicine</field>
+      <field name="arch" type="xml">
+       <form>
+
+         <sheet>
+            <div class="oe_title">
+                 <h1>
+                     <field name="medicine_id" readonly="1"/>
+
+                 </h1>
+             </div>
+             <group colspan="2" col="2">
+             <group>
+                    <field name="name" />
+                    <field name="medicine_company" />
+                    <field name="medicine_cost"/>
+               </group>
+                 <group>
+                    <field name="medicine_dose"/>
+                    <field name="medicine_description"/>
+                 </group>
+           </group>
+         </sheet>
+       </form>
+      </field>
+    </record>
+  </data>
+</odoo>

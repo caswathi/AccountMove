@@ -1,0 +1,173 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+  <record model="ir.ui.view" id="hospital_list">
+      <field name="name">Patient List</field>
+      <field name="model">hospital.patient</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="patient_id" />
+          <field name="partner_id"/>
+            <field name="patient_gender"/>
+          <field name="patient_dob" optional="show"/>
+          <field name="age" optional="hide"/>
+          <field name="pat_mobile" optional="show"/>
+          <field name="pat_phone" optional="hide"/>
+          <field name="blood_group" optional="hide"/>
+        </tree>
+      </field>
+  </record>
+
+    <record model="ir.ui.view" id="hospital.form">
+      <field name="name">hospital form</field>
+      <field name="model">hospital.patient</field>
+      <field name="arch" type="xml">
+       <form>
+         <sheet>
+         <div class="oe_title">
+                 <h1>
+                     <field name="patient_id" readonly="1"/>
+                 </h1>
+             </div>
+             <group colspan="2" col="2">
+             <group>
+                 <field name="partner_id" widget="res_partner_many2one"
+                        context="{'res_partner_search_mode': 'customer',
+                         'show_address': 1}"
+                        options="{&quot;always_reload&quot;: True}"/>
+                 <field name="patient_dob"/>
+               </group>
+                <group>
+                    <field name="patient_gender"/>
+                     <field name="age"/>
+                    <field name="pat_mobile"/>
+                    <field name="pat_phone"/>
+                    <field name="blood_group"/>
+                </group>
+           </group>
+             <notebook>
+                  <page string="Op History">
+                    <field name="op_lines">
+                        <tree create="false" delete="false">
+                            <field name="token"/>
+                            <field name="employee_id" />
+                            <field name="current_date" />
+                            <field name="pname" />
+                            <field name="p_age"/>
+                            <field name="p_gender"/>
+                            <field name="fees"/>
+
+                        </tree>
+
+                    </field>
+              </page>
+             </notebook>
+         </sheet>
+       </form>
+      </field>
+    </record>
+
+      <record model="ir.ui.view" id="hospital_patient_search">
+      <field name="name">Patient search</field>
+      <field name="model">hospital.patient</field>
+      <field name="arch" type="xml">
+        <search string="Search Patient">
+                    <field name="patient_id" />
+                  <field name="partner_id"/>
+                   <field name="patient_gender"/>
+                  <field name="patient_dob" optional="show"/>
+                  <field name="age" optional="hide"/>
+                  <field name="pat_mobile" optional="show"/>
+                  <field name="pat_phone" optional="hide"/>
+                  <field name="blood_group" optional="hide"/>
+<!--          <filter string="Todays OP" name="current_date"-->
+<!--                  domain="[('current_date','=',current_date)]"/>-->
+          <group expand="1" string="Group By">
+            <filter string="Blood Group" name="blood_group"
+                    context="{'group_by':'blood_group'}"/>
+          </group>
+        </search>
+      </field>
+    </record>
+
+
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="hospital_action_window">
+        <field name="name">Hospital</field>
+      <field name="res_model">hospital.patient</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+      <record model="ir.actions.act_window" id="op_action_window">
+        <field name="name">Op Tickets</field>
+      <field name="res_model">hospital.op</field>
+      <field name="view_mode">tree,form</field>
+          <field name="context">{'search_default_current_date': 1}</field>
+    </record>
+
+       <record model="ir.actions.act_window" id="consultation_action_window">
+        <field name="name">Consultation</field>
+      <field name="res_model">hospital.consultation</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+         <record model="ir.actions.act_window" id="disease_action_window">
+        <field name="name">Disease</field>
+      <field name="res_model">hospital.disease</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+       <record model="ir.actions.act_window" id="med_action_window">
+        <field name="name">Medicines</field>
+      <field name="res_model">hospital.medicine</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+       <record model="ir.actions.act_window" id="appointment_action_window">
+        <field name="name">Appointment</field>
+      <field name="res_model">hospital.appointmentt</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+
+    <menuitem name="Hospital" id="hospital_menu_root"/>
+
+    <!-- menu categories -->
+
+    <menuitem name="Patient Details" id="hospital_menu_1"
+              parent="hospital_menu_root"/>
+
+   <menuitem name="OP" id="op_menu_1" parent="hospital_menu_root"/>
+    <menuitem name="Consultation Details" id="consultation_menu_1"
+              parent="hospital_menu_root"/>
+   <menuitem name="Appointment" id="appointment_menu_1"
+             parent="hospital_menu_root"/>
+    <menuitem name="Configuration" id="configuration_menu_1"
+              parent="hospital_menu_root"/>
+
+
+
+
+
+    <menuitem name="Patient Card" id="hospital_menu_1_list"
+              parent="hospital_menu_1"
+              action="hospital_action_window"/>
+       <menuitem name="OP Ticket" id="op_menu_1_list" parent="op_menu_1"
+              action="op_action_window"/>
+      <menuitem name="Consultation Details" id="consultation_menu_1_list"
+              parent="consultation_menu_1"
+              action="consultation_action_window"/>
+       <menuitem name="Disease" id="disease_menu_1_list"
+                 parent="configuration_menu_1"
+              action="disease_action_window"/>
+       <menuitem name="Appointment" id="appointment_menu_1_list"
+                 parent="appointment_menu_1"
+              action="appointment_action_window"/>
+         <menuitem name="Medicine" id="medicines_menu_1_list"
+                   parent="configuration_menu_1"
+              action="med_action_window"/>
+  </data>
+</odoo>

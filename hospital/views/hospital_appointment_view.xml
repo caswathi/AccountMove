@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+  <record model="ir.ui.view" id="appointment_list">
+      <field name="name">Appointment List</field>
+      <field name="model">hospital.appointmentt</field>
+      <field name="arch" type="xml">
+        <tree>
+            <field name="appointment_id"/>
+            <field name="patient_id"/>
+            <field name="patient_name" />
+              <field name="employee_id" />
+              <field name="department" optional="show"/>
+             <field name="date" optional="show"/>
+            <field name="state" optional="hide"/>
+        </tree>
+      </field>
+  </record>
+
+    <record model="ir.ui.view" id="appointment_form">
+      <field name="name">Appointment form</field>
+      <field name="model">hospital.appointmentt</field>
+      <field name="arch" type="xml">
+       <form>
+           <header>
+                 <button name="button_confirm" type="object"
+                         class='oe_highlight' string="Confirm"
+                         attrs="{'invisible': ['|',('state', '=', 'op'), ('state', '=', 'appointment')]}"
+                        />
+                 <button name="button_op" type="object" string="Convert to Op"
+                         status="draft"
+                         attrs="{'invisible': ['|',('state', '=', 'op'),('state', '=', 'draft')]}"/>
+<!--               <button name="button_reset" type="object"-->
+<!--                         class='oe_highlight' string="Reset to Draft"-->
+<!--                         attrs="{'invisible': [('state', '=', 'draft')]}"-->
+<!--                        />-->
+
+               <field name="state" widget="statusbar"
+                      statusbar_visible="draft,appointment,op"/>
+           </header>
+
+         <sheet>
+             <div name="button_box" class="oe_button_box">
+                <button class="oe_stat_button" type="object" name="get_op"
+                        icon="fa-car" attrs="{'invisible': [('op_count', '=', 0)]}">
+                        <field string="OP" name="op_count" widget="statinfo"/>
+                    </button>
+                </div>
+             <group colspan="2" col="2">
+             <group>
+                    <field name="patient_id"/>
+                    <field name="patient_name" />
+                      <field name="employee_id" />
+               </group>
+                 <group>
+                     <field name="token"
+                            attrs="{'invisible': [('state', '=', 'draft')]}" />
+                    <field name="department"/>
+                    <field name="date"/>
+                 </group>
+           </group>
+         </sheet>
+       </form>
+      </field>
+    </record>
+
+      <record model="ir.ui.view" id="hospital_appointment_search">
+      <field name="name">Appointment search</field>
+      <field name="model">hospital.appointmentt</field>
+      <field name="arch" type="xml">
+        <search string="Search Appointment">
+                <field name="appointment_id"/>
+                <field name="patient_id"/>
+                <field name="patient_name" />
+                  <field name="employee_id" />
+                  <field name="department" optional="show"/>
+                 <field name="date" optional="show"/>
+                <field name="state" optional="hide"/>
+          <filter string="Todays Appointment" name="date"
+                  domain="[('date','=',current_date)]"/>
+          <group expand="1" string="Group By">
+            <filter string="Date" name="date"
+                    context="{'group_by':'date'}"/>
+              <filter string="Doctor" name="employee_id"
+                      context="{'group_by':'employee_id'}"/>
+               <filter string="Patient" name="patient_id"
+                      context="{'group_by':'patient_id'}"/>
+          </group>
+        </search>
+      </field>
+    </record>
+
+  </data>
+</odoo>
+    </data>
+</odoo>

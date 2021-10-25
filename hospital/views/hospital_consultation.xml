@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+<record model="ir.ui.view" id="consultation_list">
+      <field name="name">Consultation List</field>
+      <field name="model">hospital.consultation</field>
+      <field name="arch" type="xml">
+        <tree>
+              <field name="patient_card" optional="show"/>
+              <field name="consultation_type" />
+              <field name="department" />
+              <field name="consult_disease" />
+            <field name="consult_date" />
+             <field name="consult_doctor" />
+        </tree>
+      </field>
+  </record>
+
+    <record model="ir.ui.view" id="consultation_form">
+      <field name="name">Consultation form</field>
+      <field name="model">hospital.consultation</field>
+      <field name="arch" type="xml">
+       <form>
+         <sheet>
+             <group colspan="2" col="2">
+             <group>
+                  <field name="patient_card"/>
+                  <field name="consultation_type" />
+                    <field name="consult_date" />
+                    <field name="consult_doctor" />
+
+               </group>
+                 <group>
+                     <field name="department" />
+                     <field name="consult_disease" />
+                   <field name="diagnose" />
+                 </group>
+           </group>
+             <notebook>
+                 <page string="Treatment">
+                          <field name="treatment_lines">
+                        <tree editable="bottom">
+                            <field name="medicine_id" />
+                            <field name="med_dose" />
+                            <field name="days" />
+                            <field name="description" />
+                        </tree>
+                              <form>
+                                  <group>
+                                      <group>
+                                           <field name="medicine_id" />
+                                      </group>
+                                      <group>
+                                           <field name="med_dose" />
+                                      </group>
+                                      <group>
+                                           <field name="days" />
+                                      </group>
+                                      <group>
+                                           <field name="description" />
+                                      </group>
+                                  </group>
+                              </form>
+                    </field>
+                 </page>
+             </notebook>
+         </sheet>
+       </form>
+      </field>
+    </record>
+
+              <record model="ir.ui.view" id="hospital_consultation_search">
+      <field name="name">Consulation details search</field>
+      <field name="model">hospital.consultation</field>
+      <field name="arch" type="xml">
+        <search string="Search Consultation">
+                 <field name="patient_card" optional="show"/>
+                  <field name="consultation_type" />
+                  <field name="department" />
+                  <field name="consult_disease" />
+              <filter string="Todays Appointment" name="current_date"
+                  domain="[('consult_date','=',current_date)]"/>
+          <filter string="OP" name="consultation_type"
+                  domain="[('consultation_type','=','op')]"/>
+            <filter string="IP" name="consultation_type"
+                  domain="[('consultation_type','=','ip')]"/>
+          <group expand="1" string="Group By">
+            <filter string="Consultation Type" name="consultation_type"
+                    context="{'group_by':'consultation_type'}"/>
+              <filter string="Doctor" name="consult_doctor"
+                      context="{'group_by':'consult_doctor'}"/>
+               <filter string="Patient Card" name="patient_card"
+                      context="{'group_by':'patient_card'}"/>
+                <filter string="Consult Date" name="consult_date"
+                      context="{'group_by':'consult_date'}"/>
+                <filter string="Consult Disease" name="consult_disease"
+                      context="{'group_by':'consult_disease'}"/>
+          </group>
+        </search>
+      </field>
+    </record>
+
+    </data>
+</odoo>

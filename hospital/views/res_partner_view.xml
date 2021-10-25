@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+          <record id="view_contact_form_inherit" model="ir.ui.view">
+        <field name="name">Contact custom</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <field name="function" position="before">
+                <field name="dob"/>
+                <field name="gender" widget="radio"/>
+            </field>
+        </field>
+    </record>
+    </data>
+</odoo>

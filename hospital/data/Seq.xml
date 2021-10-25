@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+      <data>
+             <record id="increment_your_field_sequence" model="ir.sequence">
+                  <field name="name">Field Incrementation</field>
+                  <field name="code">self.service</field>
+                  <field name="prefix">PID</field>
+                  <field name="padding">5</field>
+          </record>
+      </data>
+</odoo>

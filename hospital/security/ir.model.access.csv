@@ -1,0 +1,12 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hospital,hospital.patient,model_hospital_patient,base.group_user,1,1,1,1
+access_hospital_op,hospital.op,model_hospital_op,base.group_user,1,1,1,1
+access_hospital_consultationn,hospital.consultation,model_hospital_consultation,base.group_user,1,1,1,1
+access_hospital_disease,hospital.disease,model_hospital_disease,base.group_user,1,1,1,1
+access_hospital_medicine,hospital.medicine,model_hospital_medicine,base.group_user,1,1,1,1
+access_hospital_treatment,hospital.treatment,model_hospital_treatment,base.group_user,1,1,1,1
+access_hospital_appointmentt,hospital.appointmentt,model_hospital_appointmentt,base.group_user,1,1,1,1
+
+
+
+
